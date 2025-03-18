@@ -1,9 +1,7 @@
 package array;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 // 개수 세기
 public class boj_10807 {

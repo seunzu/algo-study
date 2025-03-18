@@ -1,8 +1,6 @@
 package array;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 // 방 번호
 public class boj_1475 {

@@ -1,8 +1,6 @@
-package Ox03_array;
+package array;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 // 알파벳 개수
 public class boj_10808 {

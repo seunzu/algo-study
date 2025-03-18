@@ -1,8 +1,6 @@
 package array;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 // 애너그램 만들기
 public class boj_1919 {

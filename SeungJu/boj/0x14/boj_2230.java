@@ -3,6 +3,7 @@ package twoPointer;
 import java.io.*;
 import java.util.*;
 
+// 수 고르기
 public class boj_2230 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

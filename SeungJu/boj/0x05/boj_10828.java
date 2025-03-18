@@ -1,21 +1,17 @@
 package stack;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Stack;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 // 스택
 public class boj_10828 {
     public static void main(String[] args) throws IOException {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        Stack<Integer> stack = new Stack<>();
         StringBuilder sb = new StringBuilder();
 
-        while (n --> 0) {
+        int N = Integer.parseInt(br.readLine());
+        Stack<Integer> stack = new Stack<>();
+        while (N--> 0) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             String str = st.nextToken();
 
