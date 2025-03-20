@@ -2,6 +2,7 @@ package ch3_정렬.L3;
 
 import java.util.*;
 
+// 줄 세우기2
 class Student {
     int height, weight, index;
 
