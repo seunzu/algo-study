@@ -1,4 +1,4 @@
-package ch3_정렬.L3;
+package ch3_정렬.L3;
 
 import java.util.*;
 

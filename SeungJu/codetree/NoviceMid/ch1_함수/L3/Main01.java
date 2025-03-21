@@ -1,4 +1,4 @@
-package ch1_함수.L3;
+package ch1_함수.L3;
 
 import java.util.Scanner;
 
