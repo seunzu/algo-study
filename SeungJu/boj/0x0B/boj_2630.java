@@ -16,10 +16,15 @@ public class boj_2630 {
         }
 
         int newSize = size / 2;
-        partition(row, col, newSize);
-        partition(row, col + newSize, newSize);
-        partition(row + newSize, col, newSize);
-        partition(row + newSize, col + newSize, newSize);
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                partition(row + i * newSize, col + j * newSize, newSize);
+            }
+        }
+//        partition(row, col, newSize);
+//        partition(row, col + newSize, newSize);
+//        partition(row + newSize, col, newSize);
+//        partition(row +newSize, col + newSize, newSize);
     }
 
     public static boolean check(int row, int col, int size) {

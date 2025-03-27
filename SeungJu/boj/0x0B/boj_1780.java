@@ -5,28 +5,28 @@ import java.util.*;
 
 // 종이의 개수
 public class boj_1780 {
-    static int[][] arr;
+    static int[][] board;
     static int[] count = new int[3];
 
-    static void partition(int x, int y, int size) {
-        if (check(x, y, size)) {
-            count[arr[x][y] + 1]++;
+    public static void partition(int row, int col, int size) {
+        if (check(row, col, size)) {
+            count[board[row][col] + 1]++;
             return;
         }
 
         int newSize = size / 3;
-        for (int dx = 0; dx < 3; dx++) {
-            for (int dy = 0; dy < 3; dy++) {
-                partition(x + dx * newSize, y + dy * newSize, newSize);
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                partition(row + i * newSize, col + j * newSize, newSize);
             }
         }
     }
 
-    static boolean check(int x, int y, int size) {
-        int value = arr[x][y];
-        for (int i = x; i < x + size; i++) {
-            for (int j = y; j < y + size; j++) {
-                if (arr[i][j] != value) return false;
+    public static boolean check(int row, int col, int size) {
+        int color = board[row][col];
+        for (int i = row; i < row + size; i++) {
+            for (int j = col; j < col + size; j++) {
+                if (color != board[i][j]) return false;
             }
         }
         return true;
@@ -36,12 +36,12 @@ public class boj_1780 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int N = Integer.parseInt(br.readLine());
-        arr = new int[N][N];
+        board = new int[N][N];
 
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             for (int j = 0; j < N; j++) {
-                arr[i][j] = Integer.parseInt(st.nextToken());
+                board[i][j] = Integer.parseInt(st.nextToken());
             }
         }
 

@@ -1,3 +1,5 @@
+package recursion;
+
 import java.io.*;
 
 // 별 찍기 - 10
