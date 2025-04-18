@@ -1,3 +1,5 @@
+package 그리디.체육복;
+
 import java.util.*;
 
 class Solution {

@@ -1,3 +1,5 @@
+package 스택큐.같은숫자는싫어;
+
 import java.util.*;
 
 public class Solution {

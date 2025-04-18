@@ -1,3 +1,5 @@
+package 스택큐.주식가격;
+
 import java.util.*;
 
 class Solution {

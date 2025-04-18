@@ -1,3 +1,5 @@
+package 해시.전화번호목록;
+
 import java.util.*;
 
 // 전화번호 목록

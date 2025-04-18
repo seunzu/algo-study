@@ -1,3 +1,5 @@
+package 해시.포켓몬;
+
 import java.util.*;
 
 // 포켓몬

@@ -1,3 +1,5 @@
+package 스택큐.기능개발;
+
 import java.util.*;
 
 // 스택/큐

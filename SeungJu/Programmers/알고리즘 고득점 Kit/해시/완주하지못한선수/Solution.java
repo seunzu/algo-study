@@ -1,7 +1,9 @@
+package 해시.완주하지못한선수;
+
 import java.util.*;
 
 // 완주하지 못한 선수
-class Solution {
+public class Solution {
     public String solution(String[] participant, String[] completion) {
         String answer = "";
         HashMap<String, Integer> map = new HashMap<>();

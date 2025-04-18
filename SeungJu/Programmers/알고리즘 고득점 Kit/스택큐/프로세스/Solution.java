@@ -1,3 +1,5 @@
+package 스택큐.프로세스;
+
 import java.util.*;
 
 class Solution {

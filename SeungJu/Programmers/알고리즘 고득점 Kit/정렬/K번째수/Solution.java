@@ -1,3 +1,5 @@
+package 정렬.K번째수;
+
 import java.util.*;
 
 class Solution {
