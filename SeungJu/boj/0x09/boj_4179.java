@@ -7,7 +7,7 @@ import java.util.*;
 public class boj_4179 {
     static int n, m;
     static char[][] map;
-    static int[][] fire, jihoon;
+    static int[][] fire, jihun;
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
     static Queue<int[]> q1 = new LinkedList<>();
@@ -32,14 +32,14 @@ public class boj_4179 {
         }
     }
 
-    static int bfsJihoon() {
+    static int bfsJihun() {
         while (!q2.isEmpty()) {
             int[] cur = q2.poll();
             int x = cur[0];
             int y = cur[1];
 
             if (x == 0 || y == 0 || x == n - 1 || y == m - 1) {
-                return jihoon[x][y] + 1;
+                return jihun[x][y] + 1;
             }
 
             for (int dir = 0; dir < 4; dir++) {
@@ -47,10 +47,10 @@ public class boj_4179 {
                 int ny = y + dy[dir];
 
                 if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
-                if (map[nx][ny] == '#' || jihoon[nx][ny] != -1) continue;
-                if (fire[nx][ny] != -1 && fire[nx][ny] <= jihoon[x][y] + 1) continue;
+                if (map[nx][ny] == '#' || jihun[nx][ny] != -1) continue;
+                if (fire[nx][ny] != -1 && fire[nx][ny] <= jihun[x][y] + 1) continue;
 
-                jihoon[nx][ny] = jihoon[x][y] + 1;
+                jihun[nx][ny] = jihun[x][y] + 1;
                 q2.offer(new int[]{nx, ny});
             }
         }
@@ -66,30 +66,27 @@ public class boj_4179 {
 
         map = new char[n][m];
         fire = new int[n][m];
-        jihoon = new int[n][m];
-
-        for (int i = 0; i < n; i++) {
-            Arrays.fill(fire[i], -1);
-            Arrays.fill(jihoon[i], -1);
-        }
+        jihun = new int[n][m];
 
         for (int i = 0; i < n; i++) {
             String s = br.readLine();
             for (int j = 0; j < m; j++) {
                 map[i][j] = s.charAt(j);
+                fire[i][j] = -1;
+                jihun[i][j] = -1;
 
                 if (map[i][j] == 'F') {
                     q1.offer(new int[]{i, j});
                     fire[i][j] = 0;
                 } else if (map[i][j] == 'J') {
                     q2.offer(new int[]{i, j});
-                    jihoon[i][j] = 0;
+                    jihun[i][j] = 0;
                 }
             }
         }
 
         bfsFire();
-        int result = bfsJihoon();
+        int result = bfsJihun();
 
         System.out.println(result == -1 ? "IMPOSSIBLE" : result);
     }

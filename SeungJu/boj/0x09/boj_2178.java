@@ -5,10 +5,10 @@ import java.util.*;
 
 // 미로 탐색
 public class boj_2178 {
-    static int n, m;
+    static int N, M;
     static int[][] map;
     static boolean[][] visited;
-    static int[] dx = {-1, 1, 0, 0}; // 상하좌우
+    static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
 
     public static void bfs(int x, int y) {
@@ -18,16 +18,17 @@ public class boj_2178 {
 
         while (!q.isEmpty()) {
             int[] cur = q.poll();
+
             for (int dir = 0; dir < 4; dir++) {
                 int nx = cur[0] + dx[dir];
                 int ny = cur[1] + dy[dir];
 
-                if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
-                if (visited[nx][ny] || map[nx][ny] == 0) continue;
-
-                map[nx][ny] = map[cur[0]][cur[1]] + 1;
-                visited[nx][ny] = true;
-                q.offer(new int[]{nx, ny});
+                if (nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
+                if (!visited[nx][ny] && map[nx][ny] == 1) {
+                    map[nx][ny] = map[cur[0]][cur[1]] + 1;
+                    q.offer(new int[]{nx, ny});
+                    visited[nx][ny] = true;
+                }
             }
         }
     }
@@ -36,19 +37,19 @@ public class boj_2178 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
 
-        map = new int[n][m];
-        for (int i = 0; i < n; i++) {
+        map = new int[N][M];
+        for (int i = 0; i < N; i++) {
             String s = br.readLine();
-            for (int j = 0; j < m; j++) {
+            for (int j = 0; j < M; j++) {
                 map[i][j] = s.charAt(j) - '0';
             }
         }
 
-        visited = new boolean[n][m];
+        visited = new boolean[N][M];
         bfs(0, 0);
-        System.out.println(map[n - 1][m - 1]);
+        System.out.println(map[N - 1][M - 1]);
     }
 }

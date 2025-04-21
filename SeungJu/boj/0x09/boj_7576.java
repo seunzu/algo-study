@@ -14,16 +14,14 @@ public class boj_7576 {
     public static void bfs() {
         while (!q.isEmpty()) {
             int[] cur = q.poll();
-            int x = cur[0];
-            int y = cur[1];
 
             for (int dir = 0; dir < 4; dir++) {
-                int nx = x + dx[dir];
-                int ny = y + dy[dir];
+                int nx = cur[0] + dx[dir];
+                int ny = cur[1] + dy[dir];
 
                 if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
                 if (map[nx][ny] == 0) {
-                    map[nx][ny] = map[x][y] + 1;
+                    map[nx][ny] = map[cur[0]][cur[1]] + 1;
                     q.offer(new int[]{nx, ny});
                 }
             }
