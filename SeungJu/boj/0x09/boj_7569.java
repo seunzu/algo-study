@@ -5,12 +5,12 @@ import java.util.*;
 
 // 토마토
 class Tomato {
-    int x, y, z;
+    int z, x, y;
 
-    public Tomato(int x, int y, int z) {
+    public Tomato(int z, int x, int y) {
+        this.z = z;
         this.x = x;
         this.y = y;
-        this.z = z;
     }
 }
 
@@ -27,14 +27,14 @@ public class boj_7569 {
             Tomato cur = q.poll();
 
             for (int dir = 0; dir < 6; dir++) {
+                int nz = cur.z + dz[dir];
                 int nx = cur.x + dx[dir];
                 int ny = cur.y + dy[dir];
-                int nz = cur.z + dz[dir];
 
-                if (nx < 0 || ny < 0 || nz < 0 || nx >= H || ny >= N || nz >= M) continue;
-                if (map[nx][ny][nz] == 0) {
-                    map[nx][ny][nz] = map[cur.x][cur.y][cur.z] + 1;
-                    q.offer(new Tomato(nx, ny, nz));
+                if (nz < 0 || nx < 0 || ny < 0 || nz >= H || nx >= N || ny >= M) continue;
+                if (map[nz][nx][ny] == 0) {
+                    map[nz][nx][ny] = map[cur.z][cur.x][cur.y] + 1;
+                    q.offer(new Tomato(nz, nx, ny));
                 }
             }
         }
