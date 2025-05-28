@@ -1,14 +1,9 @@
 def solution(numbers, target):
-    count = 0
-
     def dfs(index, current_sum):
-        nonlocal count
-        if index == len(numbers):  
-            if current_sum == target:
-                count += 1
-            return
-        dfs(index + 1, current_sum + numbers[index])
-        dfs(index + 1, current_sum - numbers[index])
+        if index == len(numbers):
+            return 1 if current_sum == target else 0
+        # 각 분기에서 나오는 경우의 수를 더해서 리턴
+        return dfs(index + 1, current_sum + numbers[index]) + \
+               dfs(index + 1, current_sum - numbers[index])
 
-    dfs(0, 0)  
-    return count
+    return dfs(0, 0)
