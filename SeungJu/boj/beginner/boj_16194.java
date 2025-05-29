@@ -12,7 +12,7 @@ public class boj_16194 {
         int[] cards = new int[N + 1];
 
         StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i = 1; i <= N; i++) {a
+        for (int i = 1; i <= N; i++) {
             cards[i] = Integer.parseInt(st.nextToken());
         }
 
