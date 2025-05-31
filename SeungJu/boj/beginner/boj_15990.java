@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 // 1, 2, 3 더하기 5
 public class boj_15990 {
@@ -10,8 +9,8 @@ public class boj_15990 {
         StringBuilder sb = new StringBuilder();
 
         int T = Integer.parseInt(br.readLine());
-        int[][] dp = new int[100_001][4];
 
+        int[][] dp = new int[100_001][4];
         dp[1][1] = 1;
         dp[2][2] = 1;
         dp[3][1] = 1;
@@ -24,7 +23,7 @@ public class boj_15990 {
             dp[i][3] = (dp[i - 3][1] + dp[i - 3][2]) % MOD;
         }
 
-        for (int i = 0; i < T; i++) {
+        while (T-- > 0) {
             int N = Integer.parseInt(br.readLine());
             int res = ((dp[N][1] + dp[N][2]) % MOD + dp[N][3]) % MOD;
             sb.append(res).append("\n");
