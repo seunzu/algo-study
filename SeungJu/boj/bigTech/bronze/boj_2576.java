@@ -1,3 +1,5 @@
+package bronze;
+
 import java.io.*;
 
 // 홀수
