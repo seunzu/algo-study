@@ -18,9 +18,9 @@ public class boj_2930 {
         char[] arr = br.readLine().toCharArray();
 
         int N = Integer.parseInt(br.readLine());
-        List<char[]> target = new ArrayList<>();
+        char[][] target = new char[N][R];
         for (int i = 0; i < N; i++) {
-            target.add(br.readLine().toCharArray());
+            target[i] = br.readLine().toCharArray();
         }
 
         int curScore = 0;
