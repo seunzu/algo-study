@@ -1,7 +1,6 @@
 package silver;
 
 import java.io.*;
-import java.util.*;
 
 // 1로 만들기
 public class boj_1463 {
