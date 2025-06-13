@@ -1,4 +1,4 @@
-package silver;
+package platinum;
 
 import java.io.*;
 
