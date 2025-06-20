@@ -12,9 +12,9 @@ public class boj_1146 {
         int N = Integer.parseInt(br.readLine());
 
         int[][] arr = new int[N + 1][N + 1];
-        for (int i = 1; i <= N; i++) arr[i][0] = arr[i][i] = 1;
-
-        for (int i = 2; i <= N; i++) {
+        arr[0][0] = 0;
+        for (int i = 1; i <= N; i++) {
+            arr[i][0] = arr[i][i] = 1;
             for (int j = 1; j < i; j++) {
                 arr[i][j] = (arr[i - 1][j - 1] + arr[i - 1][j]) % MOD;
             }
@@ -24,9 +24,9 @@ public class boj_1146 {
         dp[0] = dp[1] = 1;
         for (int i = 2; i <= N; i++) {
             for (int j = 0; j < i; j++) {
-                long a = (dp[j] + 1) / 2;
-                long b = (dp[i - 1 - j] + 1) / 2;
-                dp[i] = (dp[i] + arr[i - 1][j] * b % MOD * a % MOD) % MOD;
+                long lt = (dp[j] + 1) / 2;
+                long rt = (dp[i - 1 - j] + 1) / 2;
+                dp[i] = (dp[i] + arr[i - 1][j] * lt % MOD * rt % MOD) % MOD;
             }
         }
 
