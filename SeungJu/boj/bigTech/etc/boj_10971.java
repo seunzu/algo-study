@@ -7,22 +7,26 @@ import java.util.*;
 public class boj_10971 {
     static int N;
     static int[][] W;
-    static boolean[] visited;
-    static int min = Integer.MAX_VALUE;
+    static int[][] dp;
+    static final int INF = 1_000_000_000;
 
-    static void dfs(int start, int now, int depth, int cost) {
-        if (depth == N && W[now][start] != 0) {
-            min = Math.min(min, cost + W[now][start]);
-            return;
+    static int tsp(int start, int cur, int visited) {
+        if (visited == (1 << N) - 1) {
+            return W[cur][start] == 0 ? INF : W[cur][start];
         }
 
+        if (dp[cur][visited] != -1) return dp[cur][visited];
+
+        int minCost = INF;
         for (int next = 0; next < N; next++) {
-            if (!visited[next] && W[now][next] != 0) {
-                visited[next] = true;
-                dfs(start, next, depth + 1, cost + W[now][next]);
-                visited[next] = false;
+            if ((visited & (1 << next)) == 0 && W[cur][next] != 0) {
+                int newVisited = visited | (1 << next);
+                int cost = W[cur][next] + tsp(start, next, newVisited);
+                minCost = Math.min(minCost, cost);
             }
         }
+
+        return dp[cur][visited] = minCost;
     }
 
     public static void main(String[] args) throws IOException {
@@ -30,7 +34,6 @@ public class boj_10971 {
 
         N = Integer.parseInt(br.readLine());
         W = new int[N][N];
-        visited = new boolean[N];
 
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -39,12 +42,14 @@ public class boj_10971 {
             }
         }
 
+        int answer = INF;
         for (int i = 0; i < N; i++) {
-            visited[i] = true;
-            dfs(i, i, 1, 0);
-            visited[i] = false;
+            dp = new int[N][1 << N];
+            for (int[] row : dp) Arrays.fill(row, -1);
+
+            answer = Math.min(answer, tsp(i, i, 1 << i));
         }
 
-        System.out.println(min);
+        System.out.println(answer);
     }
 }

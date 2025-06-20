@@ -10,23 +10,23 @@ public class boj_2098 {
     static int[][] dp;
     static final int INF = 1_000_000_000;
 
-    static int tsp(int city, int visited) {
+    static int tsp(int cur, int visited) {
         if (visited == (1 << N) - 1) {
-            return W[city][0] == 0 ? INF : W[city][0];
+            return W[cur][0] == 0 ? INF : W[cur][0];
         }
 
-        if (dp[city][visited] != -1) return dp[city][visited];
+        if (dp[cur][visited] != -1) return dp[cur][visited];
 
         int minCost = INF;
         for (int next = 0; next < N; next++) {
-            if ((visited & (1 << next)) == 0 && W[city][next] != 0) {
+            if ((visited & (1 << next)) == 0 && W[cur][next] != 0) {
                 int newVisited = visited | (1 << next);
-                int cost = W[city][next] + tsp(next, newVisited);
+                int cost = W[cur][next] + tsp(next, newVisited);
                 minCost = Math.min(minCost, cost);
             }
         }
 
-        return dp[city][visited] = minCost;
+        return dp[cur][visited] = minCost;
     }
 
     public static void main(String[] args) throws IOException {
@@ -44,6 +44,6 @@ public class boj_2098 {
             }
         }
 
-        System.out.println(tsp(0, 1));
+        System.out.println(tsp(0, 1 << 0));
     }
 }
