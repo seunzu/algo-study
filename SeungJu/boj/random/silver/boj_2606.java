@@ -5,11 +5,12 @@ import java.util.*;
 
 // 바이러스
 public class boj_2606 {
+    static int N, M;
     static List<List<Integer>> graph;
     static boolean[] visited;
-    static int cnt;
+    static int cnt = 0;
 
-    public static void dfs(int node) {
+    static void dfs(int node) {
         visited[node] = true;
 
         for (int next : graph.get(node)) {
@@ -23,24 +24,25 @@ public class boj_2606 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int N = Integer.parseInt(br.readLine());
-        int M = Integer.parseInt(br.readLine());
+        N = Integer.parseInt(br.readLine());
+        M = Integer.parseInt(br.readLine());
 
         graph = new ArrayList<>();
         for (int i = 0; i <= N; i++) {
             graph.add(new ArrayList<>());
         }
 
-        while (M-- > 0) {
+        for (int i = 0; i < M; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int x = Integer.parseInt(st.nextToken());
-            int y = Integer.parseInt(st.nextToken());
+            int u = Integer.parseInt(st.nextToken());
+            int v = Integer.parseInt(st.nextToken());
 
-            graph.get(x).add(y);
-            graph.get(y).add(x);
+            graph.get(u).add(v);
+            graph.get(v).add(u);
         }
 
         visited = new boolean[N + 1];
+
         dfs(1);
 
         System.out.println(cnt);

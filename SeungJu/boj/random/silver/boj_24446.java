@@ -47,12 +47,9 @@ public class boj_24446 {
             st = new StringTokenizer(br.readLine());
             int u = Integer.parseInt(st.nextToken());
             int v = Integer.parseInt(st.nextToken());
+
             graph.get(u).add(v);
             graph.get(v).add(u);
-        }
-
-        for (int i = 1; i <= N; i++) {
-            Collections.sort(graph.get(i));
         }
 
         visited = new boolean[N + 1];

@@ -3,37 +3,18 @@ package silver;
 import java.io.*;
 import java.util.*;
 
-// DFS와 BFS
-public class boj_1260 {
-    static int N, M, V;
+// 연결 요소의 개수
+public class boj_11724 {
+    static int N, M;
     static List<List<Integer>> graph;
     static boolean[] visited;
 
     static void dfs(int node) {
-        System.out.print(node + " ");
         visited[node] = true;
 
         for (int next : graph.get(node)) {
             if (!visited[next]) {
                 dfs(next);
-            }
-        }
-    }
-
-    static void bfs(int start) {
-        Queue<Integer> q = new LinkedList<>();
-        q.add(start);
-        visited[start] = true;
-
-        while (!q.isEmpty()) {
-            int cur = q.poll();
-            System.out.print(cur + " ");
-
-            for (int next : graph.get(cur)) {
-                if (!visited[next]) {
-                    visited[next] = true;
-                    q.add(next);
-                }
             }
         }
     }
@@ -44,7 +25,6 @@ public class boj_1260 {
 
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
-        V = Integer.parseInt(st.nextToken());
 
         graph = new ArrayList<>();
         for (int i = 0; i <= N; i++) {
@@ -60,15 +40,16 @@ public class boj_1260 {
             graph.get(v).add(u);
         }
 
+        visited = new boolean[N + 1];
+        int cnt = 0;
+
         for (int i = 1; i <= N; i++) {
-            Collections.sort(graph.get(i));
+            if (!visited[i]) {
+                dfs(i);
+                cnt++;
+            }
         }
 
-        visited = new boolean[N + 1];
-        dfs(V);
-        System.out.println();
-
-        visited = new boolean[N + 1];
-        bfs(V);
+        System.out.println(cnt);
     }
 }
