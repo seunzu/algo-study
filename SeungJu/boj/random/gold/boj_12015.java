@@ -18,10 +18,10 @@ public class boj_12015 {
 
         List<Integer> arr = new ArrayList<>();
         for (int a : A) {
-            int pos = Collections.binarySearch(arr, a);
-            if (pos < 0) pos = -(pos + 1);
-            if (pos == arr.size()) arr.add(a);
-            else arr.set(pos, a);
+            int num = Collections.binarySearch(arr, a);
+            if (num < 0) num = -(num + 1);
+            if (num == arr.size()) arr.add(a);
+            else arr.set(num, a);
         }
 
         System.out.println(arr.size());
