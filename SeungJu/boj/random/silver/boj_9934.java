@@ -6,8 +6,8 @@ import java.util.*;
 // 완전 이진 트리
 public class boj_9934 {
     static int K;
-    static int[] arr;
-    static List<List<Integer>> list;
+    static int[] tree;
+    static List<List<Integer>> arr;
 
     static void search(int start, int end, int depth) {
         if (depth == K) {
@@ -15,7 +15,7 @@ public class boj_9934 {
         }
 
         int mid = (start + end) / 2;
-        list.get(depth).add(arr[mid]);
+        arr.get(depth).add(tree[mid]);
 
         search(start, mid - 1, depth + 1);
         search(mid + 1, end, depth + 1);
@@ -27,21 +27,21 @@ public class boj_9934 {
 
         K = Integer.parseInt(br.readLine());
 
-        arr = new int[(int) Math.pow(2, K) - 1];
+        tree = new int[(int) Math.pow(2, K) - 1];
         StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
+        for (int i = 0; i < tree.length; i++) {
+            tree[i] = Integer.parseInt(st.nextToken());
         }
 
-        list = new ArrayList<>();
+        arr = new ArrayList<>();
         for (int i = 0; i < K; i++) {
-            list.add(new ArrayList<>());
+            arr.add(new ArrayList<>());
         }
 
-        search(0, arr.length - 1, 0);
+        search(0, tree.length - 1, 0);
 
         for (int i = 0; i < K; i++) {
-            for (int j : list.get(i)) {
+            for (int j : arr.get(i)) {
                 sb.append(j).append(" ");
             }
             sb.append("\n");
