@@ -1,8 +1,8 @@
 package gold;
 
 import java.io.*;
-import java.util.*;
 
+// 이진 검색 트리
 public class boj_5639 {
     static StringBuilder sb = new StringBuilder();
     static int[] pre;
