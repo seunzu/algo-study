@@ -3,8 +3,28 @@ package 그래프.가장먼노드;
 import java.util.*;
 
 class Solution {
+    static List<List<Integer>> graph;
+    static int[] dist;
+
+    static void bfs(int start) {
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(start);
+        dist[start] = 0;
+
+        while (!q.isEmpty()) {
+            int cur = q.poll();
+
+            for (int next : graph.get(cur)) {
+                if (dist[next] == -1) {
+                    dist[next] = dist[cur] + 1;
+                    q.offer(next);
+                }
+            }
+        }
+    }
+
     public int solution(int n, int[][] edge) {
-        List<List<Integer>> graph = new ArrayList<>();
+        graph = new ArrayList<>();
         for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
         }
@@ -14,28 +34,18 @@ class Solution {
             graph.get(e[1]).add(e[0]);
         }
 
-        int[] distance = new int[n + 1];
-        Arrays.fill(distance, -1);
-        Queue<Integer> queue = new LinkedList<>();
-        queue.offer(1);
-        distance[1] = 0;
+        dist = new int[n + 1];
+        Arrays.fill(dist, -1);
 
-        while (!queue.isEmpty()) {
-            int curr = queue.poll();
-
-            for (int next : graph.get(curr)) {
-                if (distance[next] == -1) {
-                    distance[next] = distance[curr] + 1;
-                    queue.offer(next);
-                }
-            }
-        }
+        bfs(1);
 
         int max = 0;
-        for (int d : distance) max = Math.max(max, d);
+        for (int d : dist) {
+            max = Math.max(max, d);
+        }
 
         int cnt = 0;
-        for (int d : distance) {
+        for (int d : dist) {
             if (d == max) cnt++;
         }
 
