@@ -22,13 +22,13 @@ public class boj_5972 {
     static int N, M;
     static List<List<Node>> graph;
 
-    static int dijkstra(int start, int end) {
+    static int dijkstra(int end) {
         int[] dist = new int[N + 1];
         Arrays.fill(dist, Integer.MAX_VALUE);
-        dist[start] = 0;
+        dist[1] = 0;
 
         Queue<Node> pQ = new PriorityQueue<>();
-        pQ.offer(new Node(start, 0));
+        pQ.offer(new Node(1, 0));
 
         while (!pQ.isEmpty()) {
             Node cur = pQ.poll();
@@ -69,6 +69,6 @@ public class boj_5972 {
             graph.get(B).add(new Node(A, C));
         }
 
-        System.out.println(dijkstra(1, N));
+        System.out.println(dijkstra(N));
     }
 }
