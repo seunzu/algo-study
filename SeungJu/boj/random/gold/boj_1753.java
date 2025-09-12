@@ -5,6 +5,10 @@ import java.util.*;
 
 // 최단경로
 public class boj_1753 {
+    static int V, E, K;
+    static List<List<Node>> graph;
+    static StringBuilder sb = new StringBuilder();
+
     static class Node implements Comparable<Node> {
         int to, cost;
 
@@ -18,10 +22,6 @@ public class boj_1753 {
             return this.cost - o.cost;
         }
     }
-
-    static int V, E, K;
-    static List<List<Node>> graph;
-    static StringBuilder sb = new StringBuilder();
 
     static void dijkstra(int start) {
         int[] dist = new int[V + 1];
