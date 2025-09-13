@@ -22,9 +22,7 @@ public class boj_1181 {
             return a.compareTo(b);
         });
 
-        for (String s : words) {
-            sb.append(s).append("\n");
-        }
+        for (String s : words) sb.append(s).append("\n");
 
         System.out.println(sb);
     }
