@@ -24,6 +24,5 @@ public class boj_1302 {
                 break;
             }
         }
-
     }
 }
