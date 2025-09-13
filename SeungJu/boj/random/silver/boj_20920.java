@@ -31,7 +31,10 @@ public class boj_20920 {
             return a.compareTo(b);
         });
 
-        for (String s : words) sb.append(s).append("\n");
+        for (String s : words) {
+            sb.append(s).append("\n");
+        }
+
         System.out.println(sb);
     }
 }
