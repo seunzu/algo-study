@@ -86,10 +86,6 @@ public class boj_3197 {
                     cnt++;
                     map[i][j] = '.';
                 }
-
-                if (map[i][j] == '.') {
-                    waterQ.offer(new int[]{i, j});
-                }
             }
         }
 
