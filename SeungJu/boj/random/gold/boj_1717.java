@@ -7,14 +7,14 @@ import java.util.*;
 public class boj_1717 {
     static int[] unf;
 
-    static int Find(int v) {
+    static int find(int v) {
         if (v == unf[v]) return v;
-        else return unf[v] = Find(unf[v]);
+        else return unf[v] = find(unf[v]);
     }
 
-    static void Union(int a, int b) {
-        int fa = Find(a);
-        int fb = Find(b);
+    static void union(int a, int b) {
+        int fa = find(a);
+        int fb = find(b);
         if (fa != fb) unf[fa] = fb;
     }
 
@@ -35,9 +35,9 @@ public class boj_1717 {
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
 
-            if (op == 0) Union(a, b);
+            if (op == 0) union(a, b);
             else {
-                if (Find(a) == Find(b)) sb.append("YES").append('\n');
+                if (find(a) == find(b)) sb.append("YES").append('\n');
                 else sb.append("NO").append('\n');
             }
         }
