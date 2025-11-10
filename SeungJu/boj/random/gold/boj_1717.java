@@ -9,7 +9,7 @@ public class boj_1717 {
 
     static int find(int v) {
         if (v == unf[v]) return v;
-        else return unf[v] = find(unf[v]);
+        return unf[v] = find(unf[v]);
     }
 
     static void union(int a, int b) {
