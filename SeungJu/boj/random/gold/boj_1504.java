@@ -6,38 +6,39 @@ import java.util.*;
 // 특정한 최단 경로
 public class boj_1504 {
     static int N, E;
-    static List<Node>[] graph;
+    static List<List<Node>> graph;
     static int INF = 200_000_100;
 
     static class Node implements Comparable<Node> {
-        int to, weight;
+        int to, cost;
 
-        public Node(int to, int weight) {
+        public Node(int to, int cost) {
             this.to = to;
-            this.weight = weight;
+            this.cost = cost;
         }
 
         @Override
         public int compareTo(Node o) {
-            return this.weight - o.weight;
+            return this.cost - o.cost;
         }
     }
 
     static int[] dijkstra(int start) {
-        PriorityQueue<Node> pQ = new PriorityQueue<>();
         int[] dist = new int[N + 1];
         Arrays.fill(dist, INF);
         dist[start] = 0;
+
+        PriorityQueue<Node> pQ = new PriorityQueue<>();
         pQ.offer(new Node(start, 0));
 
         while (!pQ.isEmpty()) {
             Node cur = pQ.poll();
 
-            if (cur.weight > dist[cur.to]) continue;
+            if (cur.cost > dist[cur.to]) continue;
 
-            for (Node next : graph[cur.to]) {
-                if (dist[next.to] > dist[cur.to] + next.weight) {
-                    dist[next.to] = dist[cur.to] + next.weight;
+            for (Node next : graph.get(cur.to)) {
+                if (dist[next.to] > dist[cur.to] + next.cost) {
+                    dist[next.to] = dist[cur.to] + next.cost;
                     pQ.offer(new Node(next.to, dist[next.to]));
                 }
             }
@@ -53,9 +54,9 @@ public class boj_1504 {
         N = Integer.parseInt(st.nextToken());
         E = Integer.parseInt(st.nextToken());
 
-        graph = new ArrayList[N + 1];
+        graph = new ArrayList<>();
         for (int i = 1; i <= N; i++) {
-            graph[i] = new ArrayList<>();
+            graph.add(new ArrayList<>());
         }
 
         for (int i = 0; i < E; i++) {
@@ -64,8 +65,8 @@ public class boj_1504 {
             int b = Integer.parseInt(st.nextToken());
             int c = Integer.parseInt(st.nextToken());
 
-            graph[a].add(new Node(b, c));
-            graph[b].add(new Node(a, c));
+            graph.get(a).add(new Node(b, c));
+            graph.get(b).add(new Node(c, a));
         }
 
         st = new StringTokenizer(br.readLine());
