@@ -29,16 +29,16 @@ public class boj_1068 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
 
         N = Integer.parseInt(br.readLine());
 
         graph = new ArrayList<>();
-        for (int i = 1; i <= N; i++) {
+        for (int i = 0; i < N; i++) {
             graph.add(new ArrayList<>());
         }
 
         int[] parent = new int[N];
+        StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
             parent[i] = Integer.parseInt(st.nextToken());
             if (parent[i] == -1) root = i;
@@ -48,7 +48,7 @@ public class boj_1068 {
         removeNode = Integer.parseInt(br.readLine());
         visited = new boolean[N];
 
-        if (removeNode == root) System.out.println(root);
+        if (removeNode == root) System.out.println(0);
         else {
             dfs(root);
             System.out.println(cnt);
