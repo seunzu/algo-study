@@ -20,10 +20,10 @@ public class boj_1238 {
     }
 
     static int N, M, X;
-    static List<Edge>[] graph, reverse;
+    static List<List<Edge>> graph, reverse;
     static int INF = 1_000_000_000;
 
-    static int[] dijkstra(List<Edge>[] g, int start) {
+    static int[] dijkstra(List<List<Edge>> g, int start) {
         int[] dist = new int[N + 1];
         Arrays.fill(dist, INF);
 
@@ -32,14 +32,12 @@ public class boj_1238 {
         dist[start] = 0;
 
         while (!pQ.isEmpty()) {
-            Edge now = pQ.poll();
-            int cur = now.to;
-            int time = now.time;
+            Edge cur = pQ.poll();
 
-            if (time > dist[cur]) continue;
+            if (cur.time > dist[cur.to]) continue;
 
-            for (Edge next : g[cur]) {
-                int nt = time + next.time;
+            for (Edge next : g.get(cur.to)) {
+                int nt = cur.time + next.time;
 
                 if (nt < dist[next.to]) {
                     dist[next.to] = nt;
@@ -59,12 +57,11 @@ public class boj_1238 {
         M = Integer.parseInt(st.nextToken());
         X = Integer.parseInt(st.nextToken());
 
-        graph = new ArrayList[N + 1];
-        reverse = new ArrayList[N + 1];
-
-        for (int i = 1; i <= N; i++) {
-            graph[i] = new ArrayList<>();
-            reverse[i] = new ArrayList<>();
+        graph = new ArrayList<>();
+        reverse = new ArrayList<>();
+        for (int i = 0; i <= N; i++) {
+            graph.add(new ArrayList<>());
+            reverse.add(new ArrayList<>());
         }
 
         for (int i = 0; i < M; i++) {
@@ -73,8 +70,8 @@ public class boj_1238 {
             int to = Integer.parseInt(st.nextToken());
             int time = Integer.parseInt(st.nextToken());
 
-            graph[from].add(new Edge(to, time));
-            reverse[to].add(new Edge(from, time));
+            graph.get(from).add(new Edge(to, time));
+            reverse.get(to).add(new Edge(from, time));
         }
 
         int[] fromX = dijkstra(graph, X);
