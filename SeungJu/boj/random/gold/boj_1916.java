@@ -37,6 +37,7 @@ public class boj_1916 {
 
             for (Node next : graph.get(cur.to)) {
                 int newCost = cur.cost + next.cost;
+
                 if (newCost < dist[next.to]) {
                     dist[next.to] = newCost;
                     pQ.offer(new Node(next.to, newCost));
