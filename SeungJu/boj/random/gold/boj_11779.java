@@ -83,7 +83,6 @@ public class boj_11779 {
         int[] dist = dijkstra(start);
         sb.append(dist[end]).append("\n");
 
-
         List<Integer> path = new ArrayList<>();
         int node = end;
 
