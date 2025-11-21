@@ -53,9 +53,7 @@ public class boj_1197 {
         }
 
         unf = new int[V + 1];
-        for (int i = 1; i <= V; i++) {
-            unf[i] = i;
-        }
+        for (int i = 1; i <= V; i++) unf[i] = i;
 
         Collections.sort(edges);
 
