@@ -55,7 +55,7 @@ public class boj_1504 {
         E = Integer.parseInt(st.nextToken());
 
         graph = new ArrayList<>();
-        for (int i = 1; i <= N; i++) {
+        for (int i = 0; i <= N; i++) {
             graph.add(new ArrayList<>());
         }
 
@@ -66,7 +66,7 @@ public class boj_1504 {
             int c = Integer.parseInt(st.nextToken());
 
             graph.get(a).add(new Node(b, c));
-            graph.get(b).add(new Node(c, a));
+            graph.get(b).add(new Node(a, c));
         }
 
         st = new StringTokenizer(br.readLine());
