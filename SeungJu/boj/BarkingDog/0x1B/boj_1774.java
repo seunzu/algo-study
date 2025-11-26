@@ -37,9 +37,9 @@ public class boj_1774 {
         if (a != b) unf[b] = a;
     }
 
-    static double dist(int i, int j) {
-        long dx = pos[i][0] - pos[j][0];
-        long dy = pos[i][1] - pos[j][1];
+    static double dist(int x, int y) {
+        long dx = pos[x][0] - pos[y][0];
+        long dy = pos[x][1] - pos[y][1];
         return Math.sqrt(dx * dx + dy * dy);
     }
 
