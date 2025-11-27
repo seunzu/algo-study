@@ -38,11 +38,9 @@ public class boj_13168 {
 
         K = Integer.parseInt(br.readLine());
 
-        int cityCnt = N;
-        double[][] normal = new double[cityCnt][cityCnt];
-        double[][] rail = new double[cityCnt][cityCnt];
-
-        for (int i = 0; i < cityCnt; i++) {
+        double[][] normal = new double[N][N];
+        double[][] rail = new double[N][N];
+        for (int i = 0; i < N; i++) {
             Arrays.fill(normal[i], INF);
             Arrays.fill(rail[i], INF);
             normal[i][i] = 0;
@@ -67,9 +65,9 @@ public class boj_13168 {
             rail[b][a] = Math.min(rail[b][a], railCost);
         }
 
-        for (int k = 0; k < cityCnt; k++) {
-            for (int i = 0; i < cityCnt; i++) {
-                for (int j = 0; j < cityCnt; j++) {
+        for (int k = 0; k < N; k++) {
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
                     normal[i][j] = Math.min(normal[i][j], normal[i][k] + normal[k][j]);
                     rail[i][j] = Math.min(rail[i][j], rail[i][k] + rail[k][j]);
                 }
@@ -78,7 +76,6 @@ public class boj_13168 {
 
         double normalCost = 0;
         double railCost = R;
-
         for (int i = 0; i < M - 1; i++) {
             int from = travel[i];
             int to = travel[i + 1];
