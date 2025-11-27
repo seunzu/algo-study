@@ -6,11 +6,11 @@ import java.util.*;
 // 내일로 여행
 public class boj_13168 {
     static int N, R, M, K;
-    static final int INF = 1_000_000_000;
+    static final double INF = 1_000_000_000;
 
-    static int getRailCost(String type, int cost) {
+    static double getRailCost(String type, double cost) {
         if (type.equals("Mugunghwa") || type.equals("ITX-Saemaeul") || type.equals("ITX-Cheongchun")) return 0;
-        else if (type.equals("S-Train") || type.equals("V-Train")) return cost / 2;
+        else if (type.equals("S-Train") || type.equals("V-Train")) return cost / 2.0;
         return cost;
     }
 
@@ -23,7 +23,10 @@ public class boj_13168 {
 
         Map<String, Integer> HM = new HashMap<>();
         st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < N; i++) HM.put(st.nextToken(), i);
+        for (int i = 0; i < N; i++) {
+            String name = st.nextToken();
+            if (!HM.containsKey(name)) HM.put(name, HM.size());
+        }
 
         M = Integer.parseInt(br.readLine());
 
@@ -35,9 +38,11 @@ public class boj_13168 {
 
         K = Integer.parseInt(br.readLine());
 
-        int[][] normal = new int[N][N];
-        int[][] rail = new int[N][N];
-        for (int i = 0; i < N; i++) {
+        int cityCnt = N;
+        double[][] normal = new double[cityCnt][cityCnt];
+        double[][] rail = new double[cityCnt][cityCnt];
+
+        for (int i = 0; i < cityCnt; i++) {
             Arrays.fill(normal[i], INF);
             Arrays.fill(rail[i], INF);
             normal[i][i] = 0;
@@ -49,7 +54,7 @@ public class boj_13168 {
             String type = st.nextToken();
             String s = st.nextToken();
             String e = st.nextToken();
-            int cost = Integer.parseInt(st.nextToken());
+            double cost = Double.parseDouble(st.nextToken());
 
             int a = HM.get(s);
             int b = HM.get(e);
@@ -57,22 +62,22 @@ public class boj_13168 {
             normal[a][b] = Math.min(normal[a][b], cost);
             normal[b][a] = Math.min(normal[b][a], cost);
 
-            int railCost = getRailCost(type, cost);
+            double railCost = getRailCost(type, cost);
             rail[a][b] = Math.min(rail[a][b], railCost);
             rail[b][a] = Math.min(rail[b][a], railCost);
         }
 
-        for (int k = 0; k < N; k++) {
-            for (int i = 0; i < N; i++) {
-                for (int j = 0; j < N; j++) {
+        for (int k = 0; k < cityCnt; k++) {
+            for (int i = 0; i < cityCnt; i++) {
+                for (int j = 0; j < cityCnt; j++) {
                     normal[i][j] = Math.min(normal[i][j], normal[i][k] + normal[k][j]);
                     rail[i][j] = Math.min(rail[i][j], rail[i][k] + rail[k][j]);
                 }
             }
         }
 
-        int normalCost = 0;
-        int railCost = R;
+        double normalCost = 0;
+        double railCost = R;
 
         for (int i = 0; i < M - 1; i++) {
             int from = travel[i];
