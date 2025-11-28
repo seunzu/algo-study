@@ -14,9 +14,9 @@ public class boj_11780 {
 
         int n = Integer.parseInt(br.readLine());
         int m = Integer.parseInt(br.readLine());
+
         dist = new int[n + 1][n + 1];
         path = new int[n + 1][n + 1];
-
         for (int i = 1; i <= n; i++) {
             Arrays.fill(dist[i], INF);
             dist[i][i] = 0;

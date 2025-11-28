@@ -14,13 +14,11 @@ public class boj_11404 {
 
         int n = Integer.parseInt(br.readLine());
         int m = Integer.parseInt(br.readLine());
-        map = new int[n + 1][n + 1];
 
+        map = new int[n + 1][n + 1];
         for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= n; j++) {
-                if (i == j) map[i][j] = 0;
-                else map[i][j] = INF;
-            }
+            Arrays.fill(map[i], INF);
+            map[i][i] = 0;
         }
 
         for (int i = 0; i < m; i++) {
