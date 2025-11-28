@@ -14,22 +14,23 @@ public class boj_1507 {
 
         N = Integer.parseInt(br.readLine());
 
-        dist = new int[N][N];
-        for (int i = 0; i < N; i++) {
+        dist = new int[N + 1][N + 1];
+        for (int i = 1; i <= N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < N; j++) {
+            for (int j = 1; j <= N; j++) {
                 dist[i][j] = Integer.parseInt(st.nextToken());
             }
         }
 
-        needed = new boolean[N][N];
-        for (int i = 0; i < N; i++) {
+        needed = new boolean[N + 1][N + 1];
+        for (int i = 1; i <= N; i++) {
             Arrays.fill(needed[i], true);
         }
 
-        for (int k = 0; k < N; k++) {
-            for (int i = 0; i < N; i++) {
-                for (int j = 0; j < N; j++) {
+        for (int k = 1; k <= N; k++) {
+            for (int i = 1; i <= N; i++) {
+                for (int j = 1; j <= N; j++) {
+
                     if (i == j || i == k || j == k) continue;
 
                     if (dist[i][j] > dist[i][k] + dist[k][j]) {
@@ -45,8 +46,8 @@ public class boj_1507 {
         }
 
         int ans = 0;
-        for (int i = 0; i < N; i++) {
-            for (int j = i + 1; j < N; j++) {
+        for (int i = 1; i <= N; i++) {
+            for (int j = i + 1; j <= N; j++) {
                 if (needed[i][j]) ans += dist[i][j];
             }
         }
