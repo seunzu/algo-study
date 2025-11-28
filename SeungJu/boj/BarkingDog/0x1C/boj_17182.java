@@ -8,7 +8,7 @@ public class boj_17182 {
     static int N, K;
     static int[][] dist;
     static boolean[] visited;
-    static int ans = Integer.MAX_VALUE;
+    static int ans = 1_000_000_000;
 
     static void dfs(int start, int cnt, int cost) {
         if (cnt == N) {

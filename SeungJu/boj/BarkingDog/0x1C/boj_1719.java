@@ -3,39 +3,47 @@ package floydWarshall;
 import java.io.*;
 import java.util.*;
 
-// 플로이드
-public class boj_11404 {
-    static int[][] map;
-    static final int INF = 1_000_000_000;;
+// 택배
+public class boj_1719 {
+    static int n, m;
+    static int[][] dist, next;
+    static final int INF = 1_000_000_000;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
         StringBuilder sb = new StringBuilder();
 
-        int n = Integer.parseInt(br.readLine());
-        int m = Integer.parseInt(br.readLine());
-        map = new int[n + 1][n + 1];
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
 
+        next = new int[n + 1][n + 1];
+        dist = new int[n + 1][n + 1];
         for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= n; j++) {
-                if (i == j) map[i][j] = 0;
-                else map[i][j] = INF;
-            }
+            Arrays.fill(dist[i], INF);
+            dist[i][i] = 0;
         }
 
         for (int i = 0; i < m; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
+            st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
             int c = Integer.parseInt(st.nextToken());
-            map[a][b] = Math.min(map[a][b], c);
+
+            dist[a][b] = c;
+            dist[b][a] = c;
+
+            next[a][b] = b;
+            next[b][a] = a;
         }
 
         for (int k = 1; k <= n; k++) {
             for (int i = 1; i <= n; i++) {
                 for (int j = 1; j <= n; j++) {
-                    if (map[i][j] > map[i][k] + map[k][j]) {
-                        map[i][j] = map[i][k] + map[k][j];
+
+                    if (dist[i][j] > dist[i][k] + dist[k][j]) {
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                        next[i][j] = next[i][k];
                     }
                 }
             }
@@ -43,8 +51,8 @@ public class boj_11404 {
 
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) {
-                if (map[i][j] == INF) sb.append("0 ");
-                else sb.append(map[i][j]).append(" ");
+                if (i == j) sb.append("- ");
+                else sb.append(next[i][j]).append(" ");
             }
             sb.append("\n");
         }

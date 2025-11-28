@@ -32,7 +32,7 @@ public class boj_1956 {
         for (int k = 1; k <= V; k++) {
             for (int i = 1; i <= V; i++) {
                 for (int j = 1; j <= V; j++) {
-                    if (dist[i][k] + dist[k][j] < dist[i][j]) {
+                    if (dist[i][j] > dist[i][k] + dist[k][j]) {
                         dist[i][j] = dist[i][k] + dist[k][j];
                     }
                 }
