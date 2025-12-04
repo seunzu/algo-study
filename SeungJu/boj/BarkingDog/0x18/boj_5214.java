@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 환승
-public class boj_5124 {
+public class boj_5214 {
     static int N, K, M;
     static List<List<Integer>> graph;
 
