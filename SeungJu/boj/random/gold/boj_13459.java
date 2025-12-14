@@ -49,10 +49,8 @@ public class boj_13459 {
                 int[] rmove = move(cur.rx, cur.ry, dx[d], dy[d]);
                 int[] bmove = move(cur.bx, cur.by, dx[d], dy[d]);
 
-                int nrx = rmove[0];
-                int nry = rmove[1];
-                int nbx = bmove[0];
-                int nby = bmove[1];
+                int nrx = rmove[0], nry = rmove[1];
+                int nbx = bmove[0], nby = bmove[1];
 
                 if (board[nbx][nby] == 'O') continue;
                 if (board[nrx][nry] == 'O') return 1;
