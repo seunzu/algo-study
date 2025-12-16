@@ -7,6 +7,27 @@ import java.util.*;
 public class boj_6549 {
     static int n;
 
+    static long getMax(long[] h) {
+        Stack<Integer> stack = new Stack<>();
+        long max = 0;
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && h[stack.peek()] > h[i]) {
+                long height = h[stack.pop()];
+                long width = stack.isEmpty() ? i : i - stack.peek() - 1;
+                max = Math.max(max, height * width);
+            }
+            stack.push(i);
+        }
+
+        while (!stack.isEmpty()) {
+            long height = h[stack.pop()];
+            long width = stack.isEmpty() ? n : n - stack.peek() - 1;
+            max = Math.max(max, height * width);
+        }
+
+        return max;
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
@@ -22,22 +43,7 @@ public class boj_6549 {
                 h[i] = Long.parseLong(st.nextToken());
             }
 
-            Stack<Integer> stack = new Stack<>();
-            long max = 0;
-            for (int i = 0; i < n; i++) {
-                while (!stack.isEmpty() && h[stack.peek()] > h[i]) {
-                    long height = h[stack.pop()];
-                    long width = stack.isEmpty() ? i : i - stack.peek() - 1;
-                    max = Math.max(max, height * width);
-                }
-                stack.push(i);
-            }
-
-            while (!stack.isEmpty()) {
-                long height = h[stack.pop()];
-                long width = stack.isEmpty() ? n : n - stack.peek() - 1;
-                max = Math.max(max, height * width);
-            }
+            long max = getMax(h);
 
             sb.append(max).append("\n");
         }
