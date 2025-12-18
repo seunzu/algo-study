@@ -3,8 +3,8 @@ package gold;
 import java.io.*;
 import java.util.*;
 
-// 줄 세우기
-public class boj_2252 {
+// 문제집
+public class boj_1766 {
     static int N, M;
     static List<List<Integer>> graph;
     static int[] inDegree;
@@ -33,18 +33,18 @@ public class boj_2252 {
             inDegree[B]++;
         }
 
-        Queue<Integer> q = new LinkedList<>();
+        PriorityQueue<Integer> pQ = new PriorityQueue<>();
         for (int i = 1; i <= N; i++) {
-            if (inDegree[i] == 0) q.offer(i);
+            if (inDegree[i] == 0) pQ.offer(i);
         }
 
-        while (!q.isEmpty()) {
-            int cur = q.poll();
-            sb.append(cur).append(' ');
+        while (!pQ.isEmpty()) {
+            int cur = pQ.poll();
+            sb.append(cur).append(" ");
 
             for (int next : graph.get(cur)) {
                 inDegree[next]--;
-                if (inDegree[next] == 0) q.offer(next);
+                if (inDegree[next] == 0) pQ.offer(next);
             }
         }
 
