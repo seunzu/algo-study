@@ -1,7 +1,6 @@
 package platinum;
 
 import java.io.*;
-import java.util.*;
 
 // 광고
 public class boj_1305 {
