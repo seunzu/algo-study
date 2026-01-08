@@ -5,3 +5,19 @@ bfs: 큐를 사용해 구현
 
 노드 엣지로 구성된 그래프를 그릴 수 있는 경우, 상하좌우 문제 뿐 아니라 dfs, bfs문제도 될 수 있음
 
+
+[큐 사용]
+from collections import deque
+queue=deque() ## 이런 식으로 만들어서 사용 
+큐는 선입선출이니까 append, popleft()사용
+stack은 후입선출이니까 append, pop()사용
+
+[재귀 함수]
+def recursive_function():
+    print('재귀 함수 호출')
+    recursive_function()
+recursive_function()
+
+[DFS]
+Depth-First-Search 깊이 우선 탐색, 그래프의 깊은 곳 탐색 알고리즘 
+[BFS]
