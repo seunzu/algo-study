@@ -1,7 +1,5 @@
 package 최댓값과최솟값;
 
-import java.util.*;
-
 public class Solution {
     public String solution(String s) {
         String[] arr = s.split(" ");
