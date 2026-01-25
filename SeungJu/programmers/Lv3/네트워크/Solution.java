@@ -1,7 +1,5 @@
 package 네트워크;
 
-import java.util.*;
-
 class Solution {
     boolean[] visited;
 
