@@ -6,7 +6,7 @@ class Solution {
     // 조합, 빈도
     static Map<String, Integer> HM;
 
-    static void combi(char[] arr, int start, int len, StringBuilder sb) {
+    static void comb(char[] arr, int start, int len, StringBuilder sb) {
         if (sb.length() == len) {
             String com = sb.toString();
             HM.put(com, HM.getOrDefault(com, 0) + 1);
@@ -15,7 +15,7 @@ class Solution {
 
         for (int i = start; i < arr.length; i++) {
             sb.append(arr[i]);
-            combi(arr, i + 1, len, sb);
+            comb(arr, i + 1, len, sb);
             sb.deleteCharAt(sb.length() - 1);
         }
     }
@@ -30,7 +30,7 @@ class Solution {
             for (String o : orders) {
                 char[] arr = o.toCharArray();
                 Arrays.sort(arr);
-                combi(arr, 0, c, new StringBuilder());
+                comb(arr, 0, c, new StringBuilder());
             }
 
             for (int cnt : HM.values()) {
