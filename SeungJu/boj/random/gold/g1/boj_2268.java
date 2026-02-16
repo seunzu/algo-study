@@ -3,28 +3,30 @@ package gold.g1;
 import java.io.*;
 import java.util.*;
 
-// 수들의 합 7
+// 수들의 합
 public class boj_2268 {
     static int N, M;
-    static long[] tree, arr;
+    static long[] tree;
+    static long[] arr;
 
-    static long prefix(int i) {
-        long sum = 0;
-        while (i > 0) {
-            sum += tree[i];
-            i -= (i & -i);
-        }
-        return sum;
+    static long query(int node, int start, int end, int lt, int rt) {
+        if (rt < start || end < lt) return 0;
+        if (lt <= start && end <= rt) return tree[node];
+
+        int mid = (start + end) / 2;
+        return query(node * 2, start, mid, lt, rt)
+                + query(node * 2 + 1, mid + 1, end, lt, rt);
     }
 
-    static long query(int lt, int rt) {
-        return prefix(rt) - prefix(lt - 1);
-    }
+    static void update(int node, int start, int end, int index, long diff) {
+        if (index < start || index > end) return;
 
-    static void update(int i, long diff) {
-        while (i <= N) {
-            tree[i] += diff;
-            i += (i & -i);
+        tree[node] += diff;
+
+        if (start != end) {
+            int mid = (start + end) / 2;
+            update(node * 2, start, mid, index, diff);
+            update(node * 2 + 1, mid + 1, end, index, diff);
         }
     }
 
@@ -36,8 +38,9 @@ public class boj_2268 {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
-        tree = new long[N + 1];
+        tree = new long[4 * N];
         arr = new long[N + 1];
+
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
             int type = Integer.parseInt(st.nextToken());
@@ -47,14 +50,14 @@ public class boj_2268 {
             if (type == 0) {
                 int lt = Math.min(a, b);
                 int rt = Math.max(a, b);
-                sb.append(query(lt, rt)).append("\n");
+                sb.append(query(1, 1, N, lt, rt)).append("\n");
             } else {
                 long diff = b - arr[a];
                 arr[a] = b;
-                update(a, diff);
+                update(1, 1, N, a, diff);
             }
         }
 
-        System.out.println(sb);
+        System.out.print(sb);
     }
 }
