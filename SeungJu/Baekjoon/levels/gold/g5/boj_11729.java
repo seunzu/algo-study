@@ -1,4 +1,8 @@
-import java.io.*;
+package gold.g5;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 // 하노이 탑 이동 순서
 public class boj_11729 {
