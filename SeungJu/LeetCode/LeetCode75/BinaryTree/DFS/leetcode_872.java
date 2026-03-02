@@ -1,0 +1,29 @@
+package LeetCode75.BinaryTree.DFS;
+
+// Leaf-Similar Trees
+public class leetcode_872 {
+    class Solution {
+        void dfs(TreeNode node, List<Integer> leaves) {
+            if (node == null) return;
+
+            if (node.left == null && node.right == null) {
+                leaves.add(node.val);
+                return;
+            }
+
+            dfs(node.left, leaves);
+            dfs(node.right, leaves);
+        }
+
+        public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+            List<Integer> leaves1 = new ArrayList<>();
+            List<Integer> leaves2 = new ArrayList<>();
+
+
+            dfs(root1, leaves1);
+            dfs(root2, leaves2);
+
+            return leaves1.equals(leaves2);
+        }
+    }
+}
