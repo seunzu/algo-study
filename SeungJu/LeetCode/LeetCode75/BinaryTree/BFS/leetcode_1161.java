@@ -1,0 +1,37 @@
+package LeetCode75.BinaryTree.BFS;
+
+// Maximum Level Sum of a Binary Tree
+public class leetcode_1161 {
+    class Solution {
+        public int maxLevelSum(TreeNode root) {
+            Queue<TreeNode> q = new ArrayDeque<>();
+            q.offer(root);
+
+            int level = 1;
+            int maxLevel = 1;
+            int maxSum = Integer.MIN_VALUE;
+
+            while (!q.isEmpty()) {
+                int size = q.size();
+                int sum = 0;
+
+                for (int i = 0; i < size; i++) {
+                    TreeNode node = q.poll();
+                    sum += node.val;
+
+                    if (node.left != null) q.offer(node.left);
+                    if (node.right != null) q.offer(node.right);
+                }
+
+                if (sum > maxSum) {
+                    maxSum = sum;
+                    maxLevel = level;
+                }
+
+                level++;
+            }
+
+            return maxLevel;
+        }
+    }
+}
