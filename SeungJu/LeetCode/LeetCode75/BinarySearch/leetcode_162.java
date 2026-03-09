@@ -4,7 +4,7 @@ package LeetCode75.BinarySearch;
 public class leetcode_162 {
     class Solution {
         public int findPeakElement(int[] nums) {
-            int lt = 1;
+            int lt = 0;
             int rt = nums.length - 1;
 
             while (lt < rt) {
