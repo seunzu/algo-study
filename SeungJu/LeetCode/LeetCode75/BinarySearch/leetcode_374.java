@@ -8,7 +8,7 @@ public class leetcode_374 {
             int rt = n;
 
             while (lt <= rt) {
-                int mid = (lt + rt) / 2;
+                int mid = lt + (rt - lt) / 2;
                 int result = guess(mid);
 
                 if (result == 0) return mid;
