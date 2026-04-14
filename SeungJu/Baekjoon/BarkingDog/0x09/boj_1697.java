@@ -5,39 +5,41 @@ import java.util.*;
 
 // 숨바꼭질
 public class boj_1697 {
-    static int MAX = 100001;
-    static int[] visited = new int[MAX];
+    static int N, K;
+    static int[] dist;
 
-    public static void bfs(int start, int target) {
-        Queue<Integer> q = new LinkedList<>();
+    static int bfs(int start, int target) {
+        Queue<Integer> q = new ArrayDeque<>();
         q.offer(start);
-        visited[start] = 1;
+        dist[start] = 0;
 
         while (!q.isEmpty()) {
             int cur = q.poll();
 
-            if (cur == target) {
-                System.out.println(visited[cur] - 1);
-                return;
-            }
+            if (cur == target) return dist[cur];
+            for (int next : new int[]{cur - 1, cur + 1, cur * 2}) {
+                if (next < 0 || next > 100000) continue;
+                if (dist[next] != -1) continue;
 
-            int[] next = {cur - 1, cur + 1, cur * 2};
-            for (int n : next) {
-                if (n >= 0 && n < MAX && visited[n] == 0) {
-                    visited[n] = visited[cur] + 1;
-                    q.offer(n);
-                }
+                dist[next] = dist[cur] + 1;
+                q.offer(next);
             }
         }
+
+        return -1;
     }
+
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int N = Integer.parseInt(st.nextToken());
-        int K = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
+        K = Integer.parseInt(st.nextToken());
 
-        bfs(N, K);
+        dist = new int[100001];
+        Arrays.fill(dist, -1);
+
+        System.out.println(bfs(N, K));
     }
 }

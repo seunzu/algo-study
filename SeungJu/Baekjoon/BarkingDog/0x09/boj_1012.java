@@ -67,7 +67,6 @@ public class boj_1012 {
             sb.append(cnt).append("\n");
         }
 
-
         System.out.println(sb);
     }
 }
