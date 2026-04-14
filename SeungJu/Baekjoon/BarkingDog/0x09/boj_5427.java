@@ -10,30 +10,34 @@ public class boj_5427 {
     static boolean[][] visited;
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
+
     static Queue<int[]> q1;
     static Queue<int[]> q2;
 
-    public static int bfs() {
+    static int bfs() {
         int time = 0;
+
         while (!q2.isEmpty()) {
             time++;
             bfsFire();
-            if (bfsJihun()) return time;
+            if (bfsJihoon()) return time;
         }
 
         return -1;
     }
 
-    public static void bfsFire() {
-        int size = q1.size();
-        for (int i = 0; i < size; i++) {
+    static void bfsFire() {
+        for (int i = 0; i < q1.size(); i++) {
             int[] cur = q1.poll();
+            int x = cur[0];
+            int y = cur[1];
 
             for (int dir = 0; dir < 4; dir++) {
-                int nx = cur[0] + dx[dir];
-                int ny = cur[1] + dy[dir];
+                int nx = x + dx[dir];
+                int ny = y + dy[dir];
 
-                if (nx >= 0 && nx < h && ny >= 0 && ny < w && map[nx][ny] == '.') {
+                if (nx < 0 || ny < 0 || nx >= w || ny >= h) continue;
+                if (map[nx][ny] == '.') {
                     map[nx][ny] = '*';
                     q1.offer(new int[]{nx, ny});
                 }
@@ -41,9 +45,8 @@ public class boj_5427 {
         }
     }
 
-    public static boolean bfsJihun() {
-        int size = q2.size();
-        for (int i = 0; i < size; i++) {
+    static boolean bfsJihoon() {
+        for (int i = 0; i < q2.size(); i++) {
             int[] cur = q2.poll();
             int x = cur[0];
             int y = cur[1];
@@ -52,15 +55,14 @@ public class boj_5427 {
                 return true;
             }
 
-            for (int dir = 0; dir < 4; dir++) {
-                int nx = cur[0] + dx[dir];
-                int ny = cur[1] + dy[dir];
+            for (int d = 0; d < 4; d++) {
+                int nx = x + dx[d];
+                int ny = y + dy[d];
 
-                if (nx >= 0 && nx < h && ny >= 0 && ny < w) {
-                    if (!visited[nx][ny] && map[nx][ny] == '.') {
-                        visited[nx][ny] = true;
-                        q2.offer(new int[]{nx, ny});
-                    }
+                if (nx < 0 || ny < 0 || nx >= w || ny >= h) continue;
+                if (!visited[nx][ny] && map[nx][ny] == '.') {
+                    visited[nx][ny] = true;
+                    q2.offer(new int[]{nx, ny});
                 }
             }
         }
@@ -81,13 +83,13 @@ public class boj_5427 {
 
             map = new char[h][w];
             visited = new boolean[h][w];
-            q1 = new LinkedList<>();
-            q2 = new LinkedList<>();
+            q1 = new ArrayDeque<>();
+            q2 = new ArrayDeque<>();
 
             for (int i = 0; i < h; i++) {
-                String s = br.readLine();
+                String line = br.readLine();
                 for (int j = 0; j < w; j++) {
-                    map[i][j] = s.charAt(j);
+                    map[i][j] = line.charAt(j);
 
                     if (map[i][j] == '*') {
                         q1.offer(new int[]{i, j});
@@ -98,9 +100,8 @@ public class boj_5427 {
                 }
             }
 
-            int result = bfs();
-
-            sb.append(result == -1 ? "IMPOSSIBLE" : result).append("\n");
+            int res = bfs();
+            sb.append(res == -1 ? "IMPOSSIBLE" : res).append("\n");
         }
 
         System.out.print(sb);
