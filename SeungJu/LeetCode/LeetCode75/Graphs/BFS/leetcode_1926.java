@@ -1,5 +1,8 @@
 package LeetCode75.Graphs.BFS;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 // Nearest Exit from Entrance in Maze
 public class leetcode_1926 {
     class Solution {
@@ -24,9 +27,7 @@ public class leetcode_1926 {
                     int nc = c + dc[i];
 
                     if (nr < 0 || nc < 0 || nr >= m || nc >= n) continue;
-
                     if (maze[nr][nc] == '+') continue;
-
                     if (nr == 0 || nr == m-1 || nc == 0 || nc == n-1) {
                         return dist + 1;
                     }
