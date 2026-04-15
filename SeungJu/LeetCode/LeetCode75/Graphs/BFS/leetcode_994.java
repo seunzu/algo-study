@@ -1,8 +1,5 @@
 package LeetCode75.Graphs.BFS;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-
 // Rotting Oranges
 public class leetcode_994 {
     class Solution {
@@ -14,7 +11,9 @@ public class leetcode_994 {
             int minutes = 0;
 
             while (!q.isEmpty() && fresh > 0) {
-                for (int i = 0; i < q.size(); i++) {
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
                     int[] cur = q.poll();
 
                     for (int d = 0; d < 4; d++) {
@@ -22,6 +21,7 @@ public class leetcode_994 {
                         int nc = cur[1] + dc[d];
 
                         if (nr < 0 || nc < 0 || nr >= m || nc >= n) continue;
+
                         if (grid[nr][nc] != 1) continue;
 
                         grid[nr][nc] = 2;
