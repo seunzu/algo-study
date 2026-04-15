@@ -27,7 +27,9 @@ public class boj_5427 {
     }
 
     static void bfsFire() {
-        for (int i = 0; i < q1.size(); i++) {
+        int size = q1.size();
+
+        for (int i = 0; i < size; i++) {
             int[] cur = q1.poll();
             int x = cur[0];
             int y = cur[1];
@@ -46,7 +48,9 @@ public class boj_5427 {
     }
 
     static boolean bfsJihoon() {
-        for (int i = 0; i < q2.size(); i++) {
+        int size = q2.size();
+
+        for (int i = 0; i < size; i++) {
             int[] cur = q2.poll();
             int x = cur[0];
             int y = cur[1];
