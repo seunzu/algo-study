@@ -5,23 +5,25 @@ import java.util.*;
 
 // 토마토
 public class boj_7576 {
-    static int n, m;
-    static int[][] map;
-    static int[] dx = {-1, 1, 0, 0}; // 상하좌우
+    static int M, N;
+    static int[][] board;
+    static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
-    static Queue<int[]> q = new LinkedList<>();
+    static Queue<int[]> q = new ArrayDeque<>();
 
-    public static void bfs() {
+    static void bfs() {
         while (!q.isEmpty()) {
             int[] cur = q.poll();
+            int x = cur[0];
+            int y = cur[1];
 
-            for (int dir = 0; dir < 4; dir++) {
-                int nx = cur[0] + dx[dir];
-                int ny = cur[1] + dy[dir];
+            for (int d = 0; d < 4; d++) {
+                int nx = x + dx[d];
+                int ny = y + dy[d];
 
-                if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
-                if (map[nx][ny] == 0) {
-                    map[nx][ny] = map[cur[0]][cur[1]] + 1;
+                if (nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
+                if (board[nx][ny] == 0) {
+                    board[nx][ny] = board[x][y] + 1;
                     q.offer(new int[]{nx, ny});
                 }
             }
@@ -32,16 +34,16 @@ public class boj_7576 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        m = Integer.parseInt(st.nextToken()); // 열
-        n = Integer.parseInt(st.nextToken()); // 행
+        M = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
 
-        map = new int[n][m];
-
-        for (int i = 0; i < n; i++) {
+        board = new int[N][M];
+        for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < m; j++) {
-                map[i][j] = Integer.parseInt(st.nextToken());
-                if (map[i][j] == 1) {
+            for (int j = 0; j < M; j++) {
+                board[i][j] = Integer.parseInt(st.nextToken());
+
+                if (board[i][j] == 1) {
                     q.offer(new int[]{i, j});
                 }
             }
@@ -50,13 +52,13 @@ public class boj_7576 {
         bfs();
 
         int day = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (map[i][j] == 0) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                if (board[i][j] == 0) {
                     System.out.println(-1);
                     return;
                 }
-                day = Math.max(day, map[i][j]);
+                day = Math.max(day, board[i][j]);
             }
         }
 

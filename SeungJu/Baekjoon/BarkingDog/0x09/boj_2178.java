@@ -6,28 +6,30 @@ import java.util.*;
 // 미로 탐색
 public class boj_2178 {
     static int N, M;
-    static int[][] map;
+    static int[][] board;
     static boolean[][] visited;
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
 
-    public static void bfs(int x, int y) {
-        Queue<int[]> q = new LinkedList<>();
-        q.offer(new int[]{x, y});
-        visited[x][y] = true;
+    static void bfs() {
+        Queue<int[]> q = new ArrayDeque<>();
+        q.offer(new int[]{0, 0});
+        visited[0][0] = true;
 
         while (!q.isEmpty()) {
             int[] cur = q.poll();
+            int x = cur[0];
+            int y = cur[1];
 
-            for (int dir = 0; dir < 4; dir++) {
-                int nx = cur[0] + dx[dir];
-                int ny = cur[1] + dy[dir];
+            for (int d = 0; d < 4; d++) {
+                int nx = x + dx[d];
+                int ny = y + dy[d];
 
                 if (nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
-                if (!visited[nx][ny] && map[nx][ny] == 1) {
-                    map[nx][ny] = map[cur[0]][cur[1]] + 1;
-                    q.offer(new int[]{nx, ny});
+                if (!visited[nx][ny] && board[nx][ny] == 1) {
                     visited[nx][ny] = true;
+                    q.offer(new int[]{nx, ny});
+                    board[nx][ny] = board[x][y] + 1;
                 }
             }
         }
@@ -40,16 +42,18 @@ public class boj_2178 {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
-        map = new int[N][M];
+        board = new int[N][M];
+        visited = new boolean[N][M];
+
         for (int i = 0; i < N; i++) {
-            String s = br.readLine();
+            String line = br.readLine();
             for (int j = 0; j < M; j++) {
-                map[i][j] = s.charAt(j) - '0';
+                board[i][j] = line.charAt(j) - '0';
             }
         }
 
-        visited = new boolean[N][M];
-        bfs(0, 0);
-        System.out.println(map[N - 1][M - 1]);
+        bfs();
+
+        System.out.println(board[N - 1][M - 1]);
     }
 }
